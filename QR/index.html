@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Código QR</title>
+  </head>
+  <body>
+    <div id="qr-code"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+      // Crear un enlace de descarga para el archivo
+      var downloadLink = "https://drive.google.com/uc?export=download&id=1pA9UlB7Vg10BqLJkdIXLQERPHGCvPvX2";
+      //El link drive se debe modificar el ID del archivo
+      // Generar el código QR que apunta al enlace de descarga
+      var qrCode = new QRCode(document.getElementById("qr-code"), {
+        text: downloadLink,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    </script>
+  </body>
+</html>
