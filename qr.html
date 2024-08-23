@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea tu Propio Código QR</title>
+    <style>
+        /* Estilo básico para la página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .wrapper {
+            display: inline-block;
+            text-align: left;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        .form input {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        .form button {
+            padding: 10px;
+        }
+        .qr-code img {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Crea tu Propio Código QR</h1>
+        <p>Ingresa la URL para generar el código QR</p>
+    </header>
+    <div class="wrapper">
+        <div class="form">
+            <input type="text" spellcheck="false" placeholder="Ingresa la URL">
+            <button>Generar</button>
+        </div>
+        <div class="qr-code">
+            <img src="" alt="Código QR">
+        </div>
+    </div>
+
+    <script src="qr.js"></script>
+</body>
+</html>
