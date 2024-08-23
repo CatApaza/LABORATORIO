@@ -3,25 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Informe de Ensayo</title>
     <style>
         body {
-            font-family: sans-serif;
-            background-color: rgb(210, 202, 202);
-            margin: 20px;
-            padding: 0;
+            font-size: 8pt;
+            /* Tamaño de letra 8 */
+            margin: 1mm;
+            /* Margen estrecho */
         }
         
         .pdf-container {
-            width: 210mm;
+            width: 185mm;
             /* Tamaño A4 */
-            max-width: 100%;
-            margin: auto;
-            padding: 10mm;
-            /* Margen interior */
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 297mm;
+            /* Tamaño A4 */
+            margin: 1mm;
+            /* Margen estrecho */
+            padding: 1mm;
+            /* Padding interior */
+            font-size: 8pt;
+            /* Tamaño de letra 8 */
+            display: flex;
+            /* Activar flexbox para la disposición */
+        }
+        
+        .content {
+            flex: 1;
+            /* Hacer que el contenido ocupe todo el espacio disponible */
+            padding: 10px;
+        }
+        
+        .logo-container {
+            width: 100px;
+            /* Ancho de la imagen */
+            height: 100px;
+            /* Alto de la imagen */
+            margin-right: 20px;
+            /* Margen derecho para separar la imagen del contenido */
+        }
+        
+        img.logo {
+            width: 100%;
+            /* Hacer que la imagen se ajuste al ancho del contenedor */
+            height: auto;
+            /* Ajustar el alto automáticamente para mantener las proporciones */
         }
         
         table {
@@ -114,7 +140,6 @@
             list-style: none;
             padding: 0;
         }
-        /* Estilos para ocultar elementos al imprimir */
         
         @media print {
             .btn-print {
@@ -131,22 +156,12 @@
                 color: #000;
                 /* Asegura que el texto sea visible */
             }
-            /* Eliminar los márgenes y el padding en impresión */
             .pdf-container {
                 box-shadow: none;
                 margin: 0;
                 padding: 0;
                 border: none;
             }
-        }
-        /* Ajustar el tamaño de los campos de entrada */
-        
-        input[type="text"] {
-            width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
         
         input[type="text"],
@@ -158,128 +173,157 @@
             font-size: 14px;
             /* Ajusta el tamaño del texto dentro del campo de entrada */
         }
+        
+        @media print {
+            .btn-print {
+                display: none;
+                /* Oculta el botón al imprimir */
+            }
+            input,
+            textarea {
+                border: none;
+                /* Oculta el borde de los campos de entrada en el PDF */
+                box-shadow: none;
+                /* Elimina la sombra del campo de entrada */
+                background: transparent;
+                /* Asegura que el fondo sea transparente */
+                color: #000;
+                /* Asegura que el texto sea visible */
+            }
+            .pdf-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <div class="pdf-container">
-        <div class="container">
-            <div>
-                <h1>Viena Laboratorio S.A.C.</h1>
-                <h2>Laboratorio de Suelos, Concreto y Pavimentos</h2>
-                <p>Urb. Los Delfines I, Mz. A Lote 1, Cayma - Arequipa - Perú</p>
-                <p>Tel. 054 717039, Cel: 959560951-933190287</p>
-                <p>E-mail: viena.laboratorio@gmail.com</p>
+        <div class="logo-container">
+            <img class="logo" src="LOGO.JPEG" alt="Logo">
+            <!-- Reemplaza "LOGO.JPEG" con la ruta de tu imagen -->
+        </div>
+        <div class="content">
+            <div class="container">
+                <div>
+                    <h1>Viena Laboratorio S.A.C.</h1>
+                    <h2>Laboratorio de Suelos, Concreto y Pavimentos</h2>
+                    <p style="font-size: 8pt;">Urb. Los Delfines I, Mz. A Lote 1, Cayma - Arequipa - Perú</p>
+                    <p>Tel. 054 717039, Cel: 959560951-933190287</p>
+                    <font color="blue">E-mail: viena.laboratorio@gmail.com</font>
+                </div>
+
+                <div class="code-container">
+                    <h3>CÓDIGO DE INFORME</h3>
+                    <p>
+                        <input type="text" class="form-control" name="codigo_informe" value="">
+                    </p>
+                    <p>Página: 1 de 1</p>
+                </div>
             </div>
 
-            <div class="code-container">
-                <h3>CÓDIGO DE INFORME</h3>
-                <p>
-                    <input type="text" class="form-control" name="codigo_informe" value="VIL-24-RP-0001" readonly>
-                </p>
-                <p>Página: 1 de 1</p>
+            <h2>INFORME DE ENSAYO</h2>
+
+            <table>
+                <tr>
+                    <th style="font-size: 8pt; width: 20%;">PROYECTO:</th>
+                    <td style="font-size: 8pt; width: 80%;"><input type="text" name="proyecto" value="" style="font-size: 8pt;"></td>
+                </tr>
+                <tr>
+                    <th style="font-size: 8pt; width: 20%;">UBICACION</th>
+                    <td style="font-size: 8pt; width: 80%;"><input type="text" name="ubicacion" value="" style="font-size: 8pt;"></td>
+                </tr>
+                <tr>
+                    <th style="font-size: 8pt; width: 20%;">SOLICITANTE</th>
+                    <td style="font-size: 8pt; width: 80%;"><input type="text" name="solicitante" value="" style="font-size: 8pt;"></td>
+                </tr>
+                <tr>
+                    <th style="font-size: 8pt; width: 20%;">REFERENCIA</th>
+                    <td style="font-size: 8pt; width: 80%;"><input type="text" name="referencia" value="" style="font-size: 8pt;"></td>
+                </tr>
+                <tr>
+                    <th style="font-size: 8pt; width: 20%;">FECHA:</th>
+                    <td style="font-size: 8pt; width: 80%;"><input type="text" name="fecha" value="" style="font-size: 8pt;"></td>
+                </tr>
+            </table>
+
+            <h2>RESISTENCIA EN COMPRESIÓN SIMPLE</h2>
+            <h2>TESTIGOS CILÍNDRICOS DE CONCRETO</h2>
+            <h3>ASTM C 39/C 39M-14, ΝΤΡ 339.034:1999</h3>
+
+            <table>
+                <tr>
+                    <th>Descripción</th>
+                    <th>D<sub>prom</sub> (cm)</th>
+                    <th>H<sub>prom</sub> (cm)</th>
+                    <th>Área (cm<sup>2</sup>)</th>
+                    <th>Peso (Kg)</th>
+                </tr>
+
+                <tr>
+                    <td><input type="text" class="form-control" name="descripcion1" value=""></td>
+                    <td><input type="text" class="form-control" name="d_prom1" value=""></td>
+                    <td><input type="text" name="h_prom1" value=""></td>
+                    <td><input type="text" name="area1" value=""></td>
+                    <td><input type="text" name="peso1" value=""></td>
+                </tr>
+
+                <!-- Fila adicional agregada -->
+                <tr>
+                    <td><input type="text" class="form-control" name="descripcion2" value=""></td>
+                    <td><input type="text" name="d_prom2" value=""></td>
+                    <td><input type="text" name="h_prom2" value=""></td>
+                    <td><input type="text" name="area2" value=""></td>
+                    <td><input type="text" name="peso2" value=""></td>
+                </tr>
+
+                <tr>
+                    <th>F<sub>máx</sub> (kN)</th>
+                    <th>Densidad (g/cm<sup>3</sup>)</th>
+                    <th>Resistencia (Kg/cm<sup>2</sup>)</th>
+                    <th>f</th>
+                    <th>Tipo de falla</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="f_max1" value=""></td>
+                    <td><input type="text" name="densidad1" value=""></td>
+                    <td><input type="text" name="resistencia1" value=""></td>
+                    <td><input type="text" name="f1" value=""></td>
+                    <td><input type="text" name="falla1" value=""></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="f_max2" value=""></td>
+                    <td><input type="text" name="densidad2" value=""></td>
+                    <td><input type="text" name="resistencia2" value=""></td>
+                    <td><input type="text" name="f2" value=""></td>
+                    <td><input type="text" name="falla2" value=""></td>
+                </tr>
+            </table>
+
+            <h3 class="mt-4">OBSERVACIONES:</h3>
+            <div class="form-group">
+                <label for="observaciones">Detalles:</label>
+                <textarea class="form-control textarea-custom" id="observaciones" rows="4" placeholder="Ingrese aquí las observaciones..."></textarea>
             </div>
+
+            <h3>Referencias normativas:</h3>
+            <ul>
+                <li>Standard test method for compressive strength of cylindrical concrete specimens.</li>
+                <li>Método de ensayo a la compresión de probetas de concreto.</li>
+            </ul>
+
+            <h3>Técnico responsable:</h3>
+            <p>A.A.C.C.</p>
+
+            <p>Revisión: J.C.B.R.</p>
+            <p>El uso de la información contenida en este documento es de exclusiva responsabilidad del solicitante.</p>
+
+            <button class="btn-print" id="printButton" style="font-size: 8pt;">Generar PDF</button>
         </div>
-
-        <h2>INFORME DE ENSAYO</h2>
-
-        <table>
-            <tr>
-                <th>PROYECTO:</th>
-                <td><input type="text" name="proyecto" value="CONSTRUCCIÓN SEDE UTP AREQUIPA IV - ETAPA I"></td>
-            </tr>
-            <tr>
-                <th>UBICACIÓN:</th>
-                <td><input type="text" name="ubicacion" value="AV. PARRA 217-219"></td>
-            </tr>
-            <tr>
-                <th>SOLICITANTE:</th>
-                <td><input type="text" name="solicitante" value="GRUPO 5 SAC"></td>
-            </tr>
-            <tr>
-                <th>REFERENCIA:</th>
-                <td><input type="text" name="referencia" value="2DO ANILLO"></td>
-            </tr>
-            <tr>
-                <th>FECHA:</th>
-                <td><input type="text" name="fecha" value="AREQUIPA, 02 DE ENERO DEL 2024"></td>
-            </tr>
-        </table>
-
-        <h2>RESISTENCIA EN COMPRESIÓN SIMPLE</h2>
-        <h2>TESTIGOS CILÍNDRICOS DE CONCRETO</h2>
-        <h3>ASTM C 39/C 39M-14, ΝΤΡ 339.034:1999</h3>
-
-        <table>
-            <tr>
-                <th>Descripción</th>
-                <th>D<sub>prom</sub> (cm)</th>
-                <th>H<sub>prom</sub> (cm)</th>
-                <th>Área (cm<sup>2</sup>)</th>
-                <th>Peso (Kg)</th>
-            </tr>
-
-            <tr>
-                <td><input type="text" class="form-control" name="descripcion1" value=""></td>
-                <td><input type="number" name="d_prom1" value=""></td>
-                <td><input type="number" name="h_prom1" value=""></td>
-                <td><input type="number" name="area1" value=""></td>
-                <td><input type="number" name="peso1" value=""></td>
-            </tr>
-
-            <!-- Fila adicional agregada -->
-            <tr>
-                <td><input type="text" class="form-control" name="descripcion2" value=""></td>
-                <td><input type="number" name="d_prom2" value=""></td>
-                <td><input type="number" name="h_prom2" value=""></td>
-                <td><input type="number" name="area2" value=""></td>
-                <td><input type="number" name="peso2" value=""></td>
-            </tr>
-
-            <tr>
-                <th>F<sub>máx</sub> (kN)</th>
-                <th>Densidad (g/cm<sup>3</sup>)</th>
-                <th>Resistencia (Kg/cm<sup>2</sup>)</th>
-                <th>f</th>
-                <th>Tipo de falla</th>
-            </tr>
-            <tr>
-                <td><input type="number" name="f_max1" value="521.610"></td>
-                <td><input type="number" name="densidad1" value="2.30"></td>
-                <td><input type="number" name="resistencia1" value="298.59"></td>
-                <td><input type="number" name="f1" value="1.07"></td>
-                <td><input type="number" name="falla1" value="4"></td>
-            </tr>
-            <tr>
-                <td><input type="number" name="f_max2" value="553.430"></td>
-                <td><input type="number" name="densidad2" value="2.34"></td>
-                <td><input type="number" name="resistencia2" value="315.40"></td>
-                <td><input type="number" name="f2" value="1.12"></td>
-                <td><input type="number" name="falla2" value="3"></td>
-            </tr>
-
-        </table>
-
-        <h3 class="mt-4">OBSERVACIONES:</h3>
-        <div class="form-group">
-            <label for="observaciones">Detalles:</label>
-            <textarea class="form-control textarea-custom" id="observaciones" rows="4" placeholder="Ingrese aquí las observaciones..."></textarea>
-        </div>
-
-        <h3>Referencias normativas:</h3>
-        <ul>
-            <li>Standard test method for compressive strength of cylindrical concrete specimens.</li>
-            <li>Método de ensayo a la compresión de probetas de concreto.</li>
-        </ul>
-
-        <h3>Técnico responsable:</h3>
-        <p>A.A.C.C.</p>
-
-        <p>Revisión: J.C.B.R.</p>
-        <p>El uso de la información contenida en este documento es de exclusiva responsabilidad del solicitante.</p>
-
-        <button class="btn-print" id="printButton">Generar PDF</button>
     </div>
 
     <!-- Incluyendo la biblioteca html2pdf.js -->
@@ -306,6 +350,7 @@
             html2pdf().from(element).set(opt).save();
         });
     </script>
+
 
 </body>
 
