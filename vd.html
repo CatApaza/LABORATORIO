@@ -159,6 +159,8 @@
             /* Ajusta el tamaño del texto dentro del campo de entrada */
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -279,6 +281,10 @@
         <p>Revisión: J.C.B.R.</p>
         <p>El uso de la información contenida en este documento es de exclusiva responsabilidad del solicitante.</p>
 
+        <div id="qrcode-container" style="text-align: center; margin-bottom: 20px;">
+            <div id="qrcode"></div>
+        </div>
+
         <button class="btn-print" id="printButton">Generar PDF</button>
     </div>
 
@@ -304,6 +310,15 @@
                 }
             };
             html2pdf().from(element).set(opt).save();
+        });
+
+        // Generar el código QR
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUrl = window.location.href;
+            QRCode.toCanvas(document.getElementById('qrcode'), currentUrl, function (error) {
+                if (error) console.error(error);
+                console.log('Código QR generado!');
+            });
         });
     </script>
 
