@@ -12,7 +12,7 @@
             margin: 20px;
             padding: 0;
         }
-        
+
         .pdf-container {
             width: 210mm;
             /* Tamaño A4 */
@@ -22,15 +22,16 @@
             /* Margen interior */
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-        
+
         table {
             border-collapse: collapse;
             width: 100%;
             table-layout: fixed;
             /* Hace que la tabla ajuste el ancho de las columnas automáticamente */
         }
-        
+
         th,
         td {
             text-align: left;
@@ -38,50 +39,50 @@
             /* Ajustar el padding si es necesario */
             border: 1px solid rgb(13, 30, 216);
         }
-        
+
         th {
             background-color: #f2f2f2;
         }
-        
+
         th:nth-child(1),
         td:nth-child(1) {
             width: 20%;
         }
-        
+
         th:nth-child(2),
         td:nth-child(2) {
             width: 15%;
         }
-        
+
         th:nth-child(3),
         td:nth-child(3) {
             width: 15%;
         }
-        
+
         th:nth-child(4),
         td:nth-child(4) {
             width: 15%;
         }
-        
+
         th:nth-child(5),
         td:nth-child(5) {
             width: 15%;
         }
-        
+
         .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .code-container {
             background-color: #f2f2f2;
             padding: 10px;
             border: 1px solid black;
             margin: 10px 0;
         }
-        
+
         .btn-print {
             display: inline-block;
             padding: 10px 20px;
@@ -95,27 +96,26 @@
             text-align: center;
             text-decoration: none;
         }
-        
+
         .btn-print:hover {
             background-color: #0056b3;
         }
-        
+
         .form-control {
             width: 100%;
             box-sizing: border-box;
         }
-        
+
         .textarea-custom {
             width: 100%;
             box-sizing: border-box;
         }
-        
+
         ul {
             list-style: none;
             padding: 0;
         }
-        /* Estilos para ocultar elementos al imprimir */
-        
+
         @media print {
             .btn-print {
                 display: none;
@@ -138,9 +138,18 @@
                 padding: 0;
                 border: none;
             }
+            /* Asegura que el QR se posicione correctamente al imprimir */
+            .qr-container {
+                position: fixed;
+                bottom: 10mm;
+                right: 10mm;
+                width: 100px;
+                height: 100px;
+                z-index: 9999;
+                /* Asegura que el QR esté sobre el contenido */
+            }
         }
-        /* Ajustar el tamaño de los campos de entrada */
-        
+
         input[type="text"] {
             width: 100%;
             box-sizing: border-box;
@@ -148,7 +157,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+
         input[type="text"],
         input[type="number"] {
             width: 100%;
@@ -157,6 +166,20 @@
             /* Asegura que el padding y el border no incrementen el ancho */
             font-size: 14px;
             /* Ajusta el tamaño del texto dentro del campo de entrada */
+        }
+
+        /* Estilo para el QR code */
+        .qr-container {
+            position: absolute;
+            bottom: 10mm;
+            right: 10mm;
+            width: 100px;
+            height: 100px;
+        }
+
+        .qr-container canvas {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -279,16 +302,34 @@
         <p>Revisión: J.C.B.R.</p>
         <p>El uso de la información contenida en este documento es de exclusiva responsabilidad del solicitante.</p>
 
+        <!-- Contenedor para el código QR -->
+        <div class="qr-container">
+            <canvas id="qrcode"></canvas>
+        </div>
+
         <button class="btn-print" id="printButton">Generar PDF</button>
     </div>
 
-    <!-- Incluyendo la biblioteca html2pdf.js -->
+    <!-- Incluyendo las bibliotecas html2pdf.js y qrcode.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar el código QR
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: "https://youtu.be/F1XqEI4vfn8?si=sqhcWOpsEMkvd4f3",
+                width: 100,
+                height: 100,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.L
+            });
+        });
+
         document.getElementById('printButton').addEventListener('click', function() {
             var element = document.querySelector('.pdf-container'); // Seleccionar el contenedor específico
             var opt = {
-                margin: 10,
+                margin: [10, 10, 40, 10], // Margen en mm (izquierda, arriba, derecha, abajo)
                 filename: 'informe.pdf',
                 image: {
                     type: 'jpeg',
