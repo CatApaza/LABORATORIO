@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea tu Propio Código QR</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Estilo del encabezado */
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            border-bottom: 5px solid #2980b9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo de la caja de formulario */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            margin: 30px auto;
+            max-width: 500px;
+        }
+
+        .form {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .form input {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .form input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Estilo para el código QR */
+        .qr-code {
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Crea tu Propio Código QR</h1>
+        <p>Ingresa la URL para generar el código QR</p>
+    </header>
+    <div class="wrapper">
+        <div class="form">
+            <input type="text" spellcheck="false" placeholder="Ingresa la URL">
+            <button>Generar</button>
+        </div>
+        <div class="qr-code">
+            <img src="" alt="Código QR">
+        </div>
+    </div>
+
+    <script src="qr.js"></script>
+</body>
+</html>
