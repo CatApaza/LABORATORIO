@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viena Laboratorio S.A.C</title>
+    <style>
+        .container {
+            position: relative;
+            padding: 20px;
+        }
+        .info-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .info-box p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .info-box input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            margin: 0;
+            font-weight: bold;
+        }
+        hr {
+            border: 2px solid black;
+            margin: 10px 0 0 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .input-field {
+            margin-bottom: 15px;
+        }
+        .input-field input {
+            width: 100%;
+            max-width: 800px;
+        }
+        #imagePreview {
+            margin-top: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+        .image-field {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="container">
+        <div class="info-box">
+            <p>Código de Informe:</p>
+            <input type="text" placeholder="Ingrese el código aquí">
+        </div>
+        <h1 style="font-weight: bold;">Viena Laboratorio S.A.C</h1>
+        <h1>Laboratorio de Suelos, Concreto y Pavimentos</h1>
+        <h2>Urb. Los Delfines I, Mz.A Lote1, Cayma - Arequipa - Perú <br>
+            Tel. 054 717039, Cel: 959560951 - 933190287 <br>
+            E-mail: viena.laboratorio@gmail.com <br>
+        </h2>
+        <br>
+        <hr style="border: 2px solid black; margin: 0;"/>
+        <br>
+        <h2 style="font-weight: bold;">INFORME DE ENSAYO</h2>
+
+        <div class="input-field">
+            <label for="proyecto">Proyecto:</label>
+            <input type="text" id="proyecto" name="proyecto">
+        </div>
+
+        <div class="input-field">
+            <label for="ubicacion">UBICACION:</label>
+            <input type="text" id="ubicacion" name="ubicacion">
+        </div>
+
+        <div class="input-field">
+            <label for="solicitante">SOLICITANTE:</label>
+            <input type="text" id="solicitante" name="solicitante">
+        </div>
+
+        <div class="input-field">
+            <label for="referencia">REFERENCIA:</label>
+            <input type="text" id="referencia" name="referencia">
+        </div>
+
+        <div class="input-field">
+            <label for="fecha">FECHA:</label>
+            <input type="date" id="fecha" name="fecha">
+        </div>
+        
+        <div class="input-field">
+            <label for="observaciones">OBSERVACIONES:</label>
+            <input type="text" id="observaciones" name="observaciones">
+        </div>
+        
+        <h2>RESISTENCIA EN COMPRESIÓN SIMPLE</h2>
+        <h2>TESTIGOS CILINDRICOS DE CONCRETO</h2>
+        <h2>ACTM C 39/C 39M-14, NTP 339.034:1999</h2>
+        <br>
+        
+        <!-- Tabla editable y botones para agregar y eliminar filas -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Codigo de proveta</th>
+                    <th>Fecha de modelo</th>
+                    <th>Fecha de rotura</th>
+                    <th>Fºc (Kg/cm2)</th>
+                    <th>Edad(dias)</th>
+                    <th>Descripción</th>
+                    <th>D1(cm)</th>
+                    <th>D2(cm)</th>
+                    <th>D3(cm)</th>
+                    <th>D4(cm)</th>
+                    <th>D5(cm)</th>
+                    <th>D6(cm)</th>
+                    <th>H1(cm)</th>
+                    <th>H2(cm)</th>
+                    <th>H3(cm)</th>
+                    <th>Dprom(cm)</th>
+                    <th>Hprom(cm)</th>
+                    <th>Area(cm2)</th>
+                    <th>Peso(Kg)</th>
+                    <th>Fmax(kN)</th>
+                    <th>Dencidad(g/cm3)</th>
+                    <th>Resistencia(Kg/cm2)</th>
+                    <th>Fº</th>
+                    <th>Tipo de falla</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- La segunda fila será editable y se llenará con JavaScript -->
+            </tbody>
+        </table>
+        <button onclick="addRow()">Agregar Fila</button>
+        <button onclick="removeRow()">Eliminar Fila</button>
+        <br>
+        <br>
+        <h1>TIPO DE FALLA:</h1>
+        <div class="image-field">
+            <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+            <img id="imagePreview" src="" alt="Vista previa de la imagen" style="display: none;">
+        </div>
+    </div>
+
+    <script>
+        const initialRows = 1;
+        const numColumns = 25; // Actualizado para incluir 25 columnas
+
+        function createRow() {
+            const row = document.createElement('tr');
+            for (let i = 0; i < numColumns; i++) {
+                const cell = document.createElement('td');
+                cell.contentEditable = "true";
+                cell.addEventListener('input', updateCalculations); // Agregar evento de input
+                row.appendChild(cell);
+            }
+            return row;
+        }
+
+        function addRow() {
+            const tableBody = document.querySelector('#dataTable tbody');
+            const newRow = createRow();
+            tableBody.appendChild(newRow);
+        }
+
+        function removeRow() {
+            const tableBody = document.querySelector('#dataTable tbody');
+            if (tableBody.rows.length > 0) {
+                tableBody.deleteRow(tableBody.rows.length - 1);
+            } else {
+                alert('No hay filas para eliminar.');
+            }
+        }
+
+        function initializeTable() {
+            const tableBody = document.querySelector('#dataTable tbody');
+            for (let i = 0; i < initialRows; i++) {
+                const row = createRow();
+                tableBody.appendChild(row);
+            }
+        }
+
+        window.onload = initializeTable;
+
+        function updateDateCalculations() {
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const fechaModelo = parseDate(cells[1]?.textContent.trim());
+                const fechaRotura = parseDate(cells[2]?.textContent.trim());
+
+                if (fechaModelo && fechaRotura) {
+                    const edadDias = Math.round((fechaRotura - fechaModelo) / (1000 * 60 * 60 * 24)); // Redondeo para obtener el número exacto de días
+                    cells[4].textContent = edadDias;
+                }
+            });
+        }
+
+        function parseDate(dateString) {
+            const [day, month, year] = dateString.split('/');
+            if (day && month && year) {
+                // Convertir año a formato de cuatro dígitos
+                const fullYear = parseInt(year, 10) + (parseInt(year, 10) < 100 ? 2000 : 0);
+                return new Date(fullYear, month - 1, day);
+            }
+            return null;
+        }
+
+        function updateCalculations() {
+            updateDateCalculations(); // Asegurarse de que las fechas sean actualizadas
+
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const d1 = parseFloat(cells[6]?.textContent.trim()) || 0;
+                const d2 = parseFloat(cells[7]?.textContent.trim()) || 0;
+                const d3 = parseFloat(cells[8]?.textContent.trim()) || 0;
+                const d4 = parseFloat(cells[9]?.textContent.trim()) || 0;
+                const d5 = parseFloat(cells[10]?.textContent.trim()) || 0;
+                const d6 = parseFloat(cells[11]?.textContent.trim()) || 0;
+
+                // Calcular el promedio de D1 a D6
+                const dProm = (d1 + d2 + d3 + d4 + d5 + d6) / 6;
+                cells[15].textContent = dProm.toFixed(2); // Mostrar el promedio con dos decimales
+
+                // Calcular el promedio de H1, H2 y H3 y mostrar en Hprom
+                const h1 = parseFloat(cells[12]?.textContent.trim()) || 0;
+                const h2 = parseFloat(cells[13]?.textContent.trim()) || 0;
+                const h3 = parseFloat(cells[14]?.textContent.trim()) || 0;
+
+                const hProm = (h1 + h2 + h3) / 3;
+                cells[16].textContent = hProm.toFixed(2); // Mostrar el promedio con dos decimales
+
+                // Calcular el área usando la fórmula: pi * (Dprom ^ 2) / 4
+                const area = (Math.PI * Math.pow(dProm, 2)) / 4;
+                cells[17].textContent = area.toFixed(2); // Mostrar el área con dos decimales
+                
+                // Calcular la resistencia con la fórmula: Fmax * 101.07 / Area
+                const fMax = parseFloat(cells[19]?.textContent.trim()) || 0; // Obtener el valor de Fmax ingresado manualmente
+                const resistencia = (fMax * 101.07) / area;
+                cells[21].textContent = resistencia.toFixed(2); // Mostrar la resistencia con dos decimales
+                
+                // Calcular Fº como Resistencia / Fºc
+                const fC = parseFloat(cells[3]?.textContent.trim()) || 1; // Obtener el valor de Fºc ingresado manualmente, prevenir división por cero
+                const fF = resistencia / fC;
+                cells[22].textContent = fF.toFixed(2); // Mostrar Fº con dos decimales
+
+                // Calcular la Densidad usando la fórmula: peso * 1000 / (Hprom * Area)
+                const peso = parseFloat(cells[18]?.textContent.trim()) || 0; // Obtener el valor del peso ingresado manualmente
+                const hPromValue = parseFloat(cells[16]?.textContent.trim()) || 0; // Obtener el valor de Hprom
+                const areaValue = parseFloat(cells[17]?.textContent.trim()) || 0; // Obtener el valor del área
+
+                const density = hPromValue && areaValue ? (peso * 1000) / (hPromValue * areaValue) : 0;
+                cells[20].textContent = density.toFixed(2); // Mostrar la densidad con dos decimales
+            });
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function() {
+                const img = document.getElementById('imagePreview');
+                img.src = reader.result;
+                img.style.display = 'block';
+            };
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    
+    <h3>Referencias normativas: ASTM C 39/C 39M-14 Standard test method for compressive strength of cylindrical concrete specimens.<br>
+        NTP 339.034:1999 Método de ensayo a la compresión de probetas de concreto.
+    </h3>
+    <h3>Técnico responsable: A.A.C.C. Revisión: J.C.B.R.</h3>
+    <h3>El uso de la información contenida en este documento es de exclusiva responsabilidad del solicitante.</h3>
+    
+</body>
+</html>
